@@ -1,0 +1,96 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background: whitesmoke;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 20px;
+}
+
+.mainBox{
+    list-style: none;
+    cursor: pointer;
+    margin: 12px;
+    padding: 7px;
+    border-radius: 6px;
+    text-align: center;
+    background: #fff;
+    box-shadow: 0 10px 25px blanchedalmond;
+    transition: all 0.3sec ease;
+}
+
+.mainBox:active{
+    transform: scale(0.95);
+}
+.mainBox .mainBoxChild1{
+  width: 185px;
+  height: 188px;
+  border-radius: 4px;
+
+}
+.mainBox:hover .mainBoxChild1{
+  filter: brightness(107%);
+}
+
+
+.mainBoxChild2{
+  display: block;
+  color: #444;
+  user-select: none;
+  font-weight: 500;
+  font-size: 1.15rem;
+  margin: 12px 0 8px;
+  text-transform: uppercase;
+}
+.mainBox .mainBoxChild2{
+
+}
+
+
+.refresh-btn {
+    position: fixed;
+    left: 50%;
+    bottom: 40px;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    font-weight: 500;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    background: #8A6CFF;
+    padding: 13px 20px;
+    border: 2px solid #fff;
+    transform: translateX(-50%);
+    box-shadow: 0 15px 30px rgba(52,87,220,0.2);
+    transition: all 0.3s ease;
+  }
+  
+.refresh-btn:hover {
+    background: #704dff;
+  }
+
+@media screen and (max-width: 500px) {
+    .container {
+      margin: 10px;
+    }
+    .container .mainBox {
+      margin: 8px;
+      padding: 5px;
+      width: calc(100% / 2 - 20px);
+    }
+    .mainBoxChild1 {
+      width: 100%;
+      height: 148px;
+    }
+    .mainBoxChild2 {
+      font-size: 1.05rem;
+    }
+    .refresh-btn {
+      font-size: 1rem;
+    }
+  }
