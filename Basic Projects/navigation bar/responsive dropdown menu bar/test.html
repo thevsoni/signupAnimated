@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            border: 2px solid red;
+        }
+
+        input,
+        #show-menu {
+            display: none;
+        }
+
+        label {
+            border: 5px solid brown;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <input type="checkbox" id="show-menu">
+        <label for="show-menu" class="menu-icon"><i>hi</i></label>
+    </div>
+</body>
+<script>
+    const showmenu = document.getElementById("show-menu");
+    showmenu.addEventListener("click", () => {
+        console.log(showmenu.checked == true);
+
+    })
+</script>
+
+</html>
