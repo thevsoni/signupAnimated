@@ -1,0 +1,72 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    --container-height: 30rem;
+    position: relative;
+    border: 2px solid black;
+    height: var(--container-height);
+}
+
+.container img {
+    position: absolute;
+    height: inherit;
+    width: 100%;
+}
+
+.container span {
+    background: rgba(245, 245, 245, 0.333);
+    color: darkmagenta;
+    font-weight: bolder;
+    font-size: calc(var(--container-height) / 12);
+    padding: calc(var(--container-height) / 90);
+    /* padding: 0.3rem; */
+    position: absolute;
+    top: calc(var(--container-height) / 2.5);
+    z-index: 1;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.container span:nth-child(1) {
+    left: 0;
+}
+
+.container span:nth-child(2) {
+    right: 0;
+}
+
+/* responsive */
+@media only screen and (max-width:1000px) {
+    .container {
+        --container-height: 25rem;
+        height: var(--container-height);
+    }
+}
+@media only screen and (max-width:800px) {
+    .container {
+        --container-height: 20rem;
+        height: var(--container-height);
+    }
+}
+@media only screen and (max-width:600px) {
+    .container {
+        --container-height: 15rem;
+        height: var(--container-height);
+    }
+}
+@media only screen and (max-width:400px) {
+    .container {
+        --container-height: 10rem;
+        height: var(--container-height);
+    }
+}
+@media only screen and (max-width:200px) {
+    .container {
+        --container-height: 5rem;
+        height: var(--container-height);
+    }
+}
