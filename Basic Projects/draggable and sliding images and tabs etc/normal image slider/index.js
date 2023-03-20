@@ -39,3 +39,11 @@ iconRight.addEventListener("click", () => {
     }
     img.src = images[currentIdx];
 })
+
+
+setInterval(() => {
+    if (currentIdx > 2) {
+        currentIdx = 0;
+    }
+    img.src = images[currentIdx++];
+}, 2000);
