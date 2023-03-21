@@ -14,7 +14,7 @@ const Navbar = () => {
                             <a className="nav-link" href="/register">Register</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link disabled" href="login">Login</a>
+                            <a className="nav-link" href="/login">Login</a>
                         </li>
                     </ul>
                 </div>
