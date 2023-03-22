@@ -1,4 +1,10 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios';
+
+
+import Loader from '../components/Loader';
+import Error from '../components/Error';
+import Success from '../components/Success';
 
 const Registerscreen = () => {
 
@@ -7,7 +13,11 @@ const Registerscreen = () => {
     const [password, setpassword] = useState('');
     const [cpassword, setcpassword] = useState('');
 
-    function register() {
+    const [loading, setloading] = useState(false);
+    const [error, seterror] = useState();
+    const [success, setsuccess] = useState();
+
+    async function register() {
         if (password === cpassword) {
             const user = {
                 name,
@@ -16,6 +26,23 @@ const Registerscreen = () => {
                 cpassword
             }
             console.log(user)
+            try {
+                setloading(true);
+                const result = (await axios.post('/api/users/register', user)).data
+                setloading(false);
+                setsuccess(true);
+
+                console.log(result)
+
+                setname('');
+                setemail('');
+                setpassword('');
+                setcpassword('');
+            } catch (error) {
+                console.log(error)
+                setloading(false)
+                seterror(false)
+            }
         }
         else {
             alert("pwd not matched");
@@ -23,8 +50,11 @@ const Registerscreen = () => {
     }
     return (
         <div>
+            {loading && (<Loader />)}
+            {error && (<Error />)}
             <div className="row justify-content-center mt-5">
                 <div className="col-md-5 mt-5">
+                    {success && (<Success message='registration successful' />)}
                     <div className='bs'>
                         <h2>Register</h2>
                         <input type="text" className='form-control' placeholder='name' value={name} onChange={(e) => { setname(e.target.value) }} />

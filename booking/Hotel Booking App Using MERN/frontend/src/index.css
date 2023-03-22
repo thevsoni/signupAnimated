@@ -61,3 +61,6 @@ h2{
   font-weight: bold !important; 
   text-align: center;
 }
+.dropdown-toggle{
+  border: none;
+}

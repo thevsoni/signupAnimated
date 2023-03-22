@@ -11,6 +11,9 @@ app.use(express.json());
 //connect with routes
 app.use('/api/rooms', require('./routes/roomsRoute'));
 
+app.use('/api/users', require('./routes/usersRoute'));
+
+
 
 const port = 5000;
 // const port = process.env.PORT || 5000;   //doubt how it takes

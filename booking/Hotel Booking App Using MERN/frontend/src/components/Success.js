@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Success = () => {
+const Success = ({ message }) => {
     return (
         <div class="alert alert-success" role="alert">
-            This is a success alert!
+            {message}
         </div>
     )
 }

@@ -3,13 +3,17 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom';//to get params from url
 import Loader from '../components/Loader';
 import Error from '../components/Error';
+import moment from 'moment';
 
 const Bookingscreen = () => {
     const [loading, setloading] = useState(true);
     const [error, seterror] = useState();
     const [room, setroom] = useState();
 
-    const { roomid } = useParams();
+    const { roomid, fromdate, todate } = useParams();
+    const ufromdate = moment(fromdate, 'DD-MM-YYYY');
+    const utodate = moment(todate, 'DD-MM-YYYY');
+    const totaldays = moment.duration(utodate.diff(ufromdate)).asDays() + 1;
 
     useEffect(() => {
         async function fetch() {
@@ -43,9 +47,9 @@ const Bookingscreen = () => {
                                 <hr />
                                 <div>
                                     <b>
-                                        <p>Name: </p>
-                                        <p>from date: </p>
-                                        <p>to date: </p>
+                                        <p>Name: {JSON.parse(localStorage.getItem("currentuser")).name}</p>
+                                        <p>from date: {fromdate}</p>
+                                        <p>to date: {todate}</p>
                                         <p>max count: {room.maxcount}</p>
                                     </b>
                                 </div>
@@ -54,9 +58,9 @@ const Bookingscreen = () => {
                                     <b>
                                         <h1>Amount</h1>
                                         <hr />
-                                        <p>Total days</p>
+                                        <p>Total days: {totaldays}</p>
                                         <p>Rent per day: {room.rentperday}</p>
-                                        <p>Total Amount</p>
+                                        <p>Total Amount:{room.rentperday * totaldays}</p>
                                     </b>
                                 </div>
 

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Button, Modal, Carousel } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-const Room = ({ room }) => {
+const Room = ({ room, fromdate, todate }) => {
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -26,7 +26,7 @@ const Room = ({ room }) => {
                 <div style={{ float: 'right' }}>
                     {console.log(room._id)}
                     {/* <Link to={'/book/${room._id}'}> */}
-                    <Link to={`/book/${room._id}`}>
+                    <Link to={`/book/${room._id}/${fromdate}/${todate}`}>
                         <button className='btn btn-primary m-2'>Book Now</button>
                     </Link>
                     <button className='btn btn-primary' onClick={handleShow}>view details</button>
@@ -40,7 +40,7 @@ const Room = ({ room }) => {
                     <Modal.Title>{room.name}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Carousel>
+                    <Carousel prevLabel='' nextLabel=''>
                         {
                             room.imageurls.map((url, key) => {
                                 return <Carousel.Item key={key}>
