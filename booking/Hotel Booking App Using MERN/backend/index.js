@@ -13,6 +13,8 @@ app.use('/api/rooms', require('./routes/roomsRoute'));
 
 app.use('/api/users', require('./routes/usersRoute'));
 
+app.use('/api/bookings', require('./routes/bookingsRoute'));
+
 
 
 const port = 5000;

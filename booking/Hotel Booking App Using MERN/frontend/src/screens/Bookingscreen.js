@@ -11,9 +11,13 @@ const Bookingscreen = () => {
     const [room, setroom] = useState();
 
     const { roomid, fromdate, todate } = useParams();
+    // const ufromdate = moment(fromdate).format('DD-MM-YYYY'); it gives error 
+    // const utodate = moment(todate).format('DD-MM-YYYY');
     const ufromdate = moment(fromdate, 'DD-MM-YYYY');
     const utodate = moment(todate, 'DD-MM-YYYY');
     const totaldays = moment.duration(utodate.diff(ufromdate)).asDays() + 1;
+
+    const [totalamount, settotalamount] = useState();
 
     useEffect(() => {
         async function fetch() {
@@ -21,6 +25,7 @@ const Bookingscreen = () => {
                 setloading(true);
                 const data = (await axios.post("/api/rooms/getroombyid", { roomid: roomid })).data;
                 setroom(data);
+                settotalamount(data.rentperday * totaldays)
                 console.log(data);
                 setloading(false);
             } catch (error) {
@@ -31,6 +36,24 @@ const Bookingscreen = () => {
         }
         fetch();
     }, [])
+
+    async function bookroom() {
+        const bookingDetails = {
+            room,
+            userid: JSON.parse(localStorage.getItem("currentuser"))._id,
+            fromdate,
+            todate,
+            totalamount,
+            totaldays
+        }
+
+        try {
+            const result = await axios.post('/api/bookings/bookroom', bookingDetails)
+            console.log("success on bookroom in bookingscreen", result);
+        } catch (error) {
+            console.log("somethings error on bookroom in bookingscreen", error);
+        }
+    }
     return (
         <div>
             {
@@ -60,12 +83,13 @@ const Bookingscreen = () => {
                                         <hr />
                                         <p>Total days: {totaldays}</p>
                                         <p>Rent per day: {room.rentperday}</p>
-                                        <p>Total Amount:{room.rentperday * totaldays}</p>
+                                        {/* <p>Total Amount:{room.rentperday * totaldays}</p> */}
+                                        <p>Total Amount:{totalamount}</p>
                                     </b>
                                 </div>
 
                                 <div style={{ float: "right" }}>
-                                    <button className='btn btn-primary'>pay now</button>
+                                    <button className='btn btn-primary' onClick={bookroom}>pay now</button>
                                 </div>
                             </div>
                         </div>

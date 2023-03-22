@@ -12,14 +12,14 @@ const Navbar = () => {
             <nav className="navbar navbar-expand-lg">
                 <a className="navbar-brand" href="/">The Hotel</a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"><i class="fa-solid fa-bars" style={{ color: "white" }}></i></span>
+                    <span className="navbar-toggler-icon"><i className="fa-solid fa-bars" style={{ color: "white" }}></i></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav mr-5">
                         {user ?
                             <div className="dropdown">
                                 <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa-solid fa-user" style={{ marginRight: "5px" }}></i>{user.name}
+                                    <i className="fa-solid fa-user" style={{ marginRight: "5px" }}></i>{user.name}
                                 </button>
                                 <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a className="dropdown-item" href="#">Bookings</a>

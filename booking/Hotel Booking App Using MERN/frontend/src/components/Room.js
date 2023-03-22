@@ -24,11 +24,14 @@ const Room = ({ room, fromdate, todate }) => {
                     <p>Type : {room.type}</p>
                 </b>
                 <div style={{ float: 'right' }}>
-                    {console.log(room._id)}
-                    {/* <Link to={'/book/${room._id}'}> */}
-                    <Link to={`/book/${room._id}/${fromdate}/${todate}`}>
-                        <button className='btn btn-primary m-2'>Book Now</button>
-                    </Link>
+                    {/* {console.log(room._id)} */}
+
+                    {(fromdate && todate) &&
+                        // {/* <Link to={'/book/${room._id}'}> i was doing wrong here ,` ke place me ' laga rha tha*/ }
+                        <Link Link to={`/book/${room._id}/${fromdate}/${todate}`}>
+                            <button className='btn btn-primary m-2'>Book Now</button>
+                        </Link>
+                    }
                     <button className='btn btn-primary' onClick={handleShow}>view details</button>
                 </div>
             </div>
@@ -62,7 +65,7 @@ const Room = ({ room, fromdate, todate }) => {
                     </Button>
                 </Modal.Footer>
             </Modal>
-        </div>
+        </div >
 
     )
 }

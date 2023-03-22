@@ -21,7 +21,8 @@ const Homescreen = () => {
     const [fromdate, setfromdate] = useState();
     const [todate, settodate] = useState();
 
-    console.log("updating main")
+    const [duplicaterooms, setduplicaterooms] = useState([]);
+
     useEffect(() => {
         console.log("updating")
         if (localStorage.getItem('currentuser')) {
@@ -33,6 +34,7 @@ const Homescreen = () => {
                     // console.log(data)
                     //firstly we will get a object and inside there my data is inside data so use like above 
                     setrooms(data)
+                    setduplicaterooms(data)
                     setloading(false);
                 } catch (error) {
                     seterror(true);
@@ -56,6 +58,41 @@ const Homescreen = () => {
 
         setfromdate(moment(dates[0].$d).format('DD-MM-YYYY'))
         settodate(moment(dates[1].$d).format('DD-MM-YYYY'))
+
+        //now code for date filter.if my room is already booked then dont show this
+        var temprooms = [];
+        var availibility = false;
+
+        for (const room of duplicaterooms) {
+            if (room.currentbookings.length > 0) {
+                for (const booking of room.currentbookings) {
+                    if (
+                        !moment(moment(dates[0].$d).format('DD-MM-YYYY')).isBetween(booking.fromdate, booking.todate)
+                        &&
+                        !moment(moment(dates[1].$d).format('DD-MM-YYYY')).isBetween(booking.fromdate, booking.todate)
+                    ) {
+                        if (
+                            moment(dates[0].$d).format('DD-MM-YYYY') !== booking.fromdate
+                            &&
+                            moment(dates[0].$d).format('DD-MM-YYYY') !== booking.todate
+                            &&
+                            moment(dates[1].$d).format('DD-MM-YYYY') !== booking.fromdate
+                            &&
+                            moment(dates[1].$d).format('DD-MM-YYYY') !== booking.todate
+                        ) {
+                            availibility = true;
+                        }
+                    }
+                }
+            }
+
+            if (availibility === true || room.currentbookings.length === 0) {
+                temprooms.push(room);
+            }
+
+            setrooms(temprooms);
+        }
+
     }
     return (
         <div className='container'>
