@@ -5,6 +5,12 @@ import Loader from '../components/Loader';
 import Error from '../components/Error';
 import moment from 'moment';
 
+import StripeCheckout from 'react-stripe-checkout'; //stripe for payment integration but this is older version
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import { PaymentElement } from '@stripe/react-stripe-js';
+//this new stripe ,how it works ,need to learn 
+
 const Bookingscreen = () => {
     const [loading, setloading] = useState(true);
     const [error, seterror] = useState();
@@ -18,6 +24,38 @@ const Bookingscreen = () => {
     const totaldays = moment.duration(utodate.diff(ufromdate)).asDays() + 1;
 
     const [totalamount, settotalamount] = useState();
+
+    //for stripe
+    // stripe older version
+    async function onToken(token) {
+        console.log(token);
+        const bookingDetails = {
+            room,
+            userid: JSON.parse(localStorage.getItem("currentuser"))._id,
+            fromdate,
+            todate,
+            totalamount,
+            totaldays
+        }
+
+        try {
+            const result = await axios.post('/api/bookings/bookroom', bookingDetails)
+            console.log("success on bookroom in bookingscreen", result);
+        } catch (error) {
+            console.log("somethings error on bookroom in bookingscreen", error);
+        }
+    }
+
+    // Make sure to call `loadStripe` outside of a component’s render to avoid
+    // recreating the `Stripe` object on every render.
+    // const stripePromise = loadStripe('pk_test_51MoVrqSJh1BoeGIOJgZS9AsoESkwk3joOgMQWMjhrg8qz2YiQ3zOAjEZ3qi7TSvNecIjsuQYKKFsHRZeo9MEUGe100A569VD7Q');
+    // const options = {
+    //     // passing the client secret obtained from the server
+    //     // clientSecret: '{{CLIENT_SECRET}}',
+    //     clientSecret: '{{sk_test_51MoVrqSJh1BoeGIOXsBgVlXqKA66WKcAF6gG3ATUCtwmi7SLdhm1yBGwFj7tFqgBoqJcOU0OQOCmlzXRr45Qspui00hEP22L8K}}',
+    // };
+    //need to learn this new version code how it works
+
 
     useEffect(() => {
         async function fetch() {
@@ -37,6 +75,7 @@ const Bookingscreen = () => {
         fetch();
     }, [])
 
+    /*
     async function bookroom() {
         const bookingDetails = {
             room,
@@ -54,6 +93,9 @@ const Bookingscreen = () => {
             console.log("somethings error on bookroom in bookingscreen", error);
         }
     }
+    */
+
+
     return (
         <div>
             {
@@ -89,7 +131,30 @@ const Bookingscreen = () => {
                                 </div>
 
                                 <div style={{ float: "right" }}>
-                                    <button className='btn btn-primary' onClick={bookroom}>pay now</button>
+                                    {/* <button className='btn btn-primary' onClick={bookroom}>pay now</button> */}
+                                    {/* if i do not integrate payment option then simply create a pay now button  */}
+
+
+                                    {/* stripe */}
+                                    <StripeCheckout token={onToken}
+                                        amount={totalamount * 100}
+                                        currency='INR'
+                                        stripeKey="pk_test_51MoVrqSJh1BoeGIOJgZS9AsoESkwk3joOgMQWMjhrg8qz2YiQ3zOAjEZ3qi7TSvNecIjsuQYKKFsHRZeo9MEUGe100A569VD7Q">
+                                        <button className='btn btn-primary'>pay now</button>
+                                        {/* agar button nahi daale to automatic ek button daal deta hai */}
+                                    </StripeCheckout>
+                                    {/* this code is of older version of stripe */}
+
+
+
+                                    {/* <Elements stripe={stripePromise} options={options}> */}
+                                    {/* <CheckoutForm /> */}
+                                    {/* <form> */}
+                                    {/* <PaymentElement /> */}
+                                    {/* <button>Submit</button> */}
+                                    {/* </form> */}
+                                    {/* </Elements> */}
+                                    {/* this new version i have to learn bcs now its not working */}
                                 </div>
                             </div>
                         </div>
