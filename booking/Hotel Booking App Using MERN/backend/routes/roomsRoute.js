@@ -26,4 +26,17 @@ router.post('/getroombyid', async (req, res) => {
     }
 })
 
+
+//admin : add room
+router.post('/addroom', async (req, res) => {
+
+    try {
+        const newroom = new Room(req.body);
+        await newroom.save();
+        res.send('new room added successfully')
+    } catch (error) {
+        return res.status(400).json({ message: "error in backend in user route in add room ", error })
+    }
+})
+
 module.exports = router;

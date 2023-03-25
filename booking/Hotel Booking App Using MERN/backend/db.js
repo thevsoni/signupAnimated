@@ -13,6 +13,11 @@ mongoose.connect(mongoURL,
     {
         useUnifiedTopology: true,
         useNewUrlParser: true
+        //agar isse kaam na chale then 2 aur options dene padte hain ,i 
+        //useCreateIndex:true,
+        //useFindAndModify:false
+
+        //if only mongodb use kare to kuch options nahi denge tb bhi chalega
     });
 
 var connection = mongoose.connection

@@ -28,7 +28,7 @@ const Room = ({ room, fromdate, todate }) => {
 
                     {(fromdate && todate) &&
                         // {/* <Link to={'/book/${room._id}'}> i was doing wrong here ,` ke place me ' laga rha tha*/ }
-                        <Link Link to={`/book/${room._id}/${fromdate}/${todate}`}>
+                        <Link to={`/book/${room._id}/${fromdate}/${todate}`}>
                             <button className='btn btn-primary m-2'>Book Now</button>
                         </Link>
                     }

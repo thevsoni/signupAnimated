@@ -42,4 +42,23 @@ router.post('/login', async (req, res) => {
     }
 })
 
+//admin : get all users
+router.get('/getallusers', async (req, res) => {
+
+    try {
+        const user = await User.find()
+        if (user) {
+            res.send(user)
+        }
+        else {
+            return res.status(400).json({ message: 'no user now' })
+        }
+    } catch (error) {
+        return res.status(400).json({ message: "error in admin , get all user", error });
+    }
+})
+
+
+
+
 module.exports = router

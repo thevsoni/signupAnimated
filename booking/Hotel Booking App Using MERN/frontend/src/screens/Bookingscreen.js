@@ -11,6 +11,8 @@ import { loadStripe } from '@stripe/stripe-js';
 import { PaymentElement } from '@stripe/react-stripe-js';
 //this new stripe ,how it works ,need to learn 
 
+import Swal from 'sweetalert2';//to show payment successfull or failed
+
 const Bookingscreen = () => {
     const [loading, setloading] = useState(true);
     const [error, seterror] = useState();
@@ -25,6 +27,7 @@ const Bookingscreen = () => {
 
     const [totalamount, settotalamount] = useState();
 
+
     //for stripe
     // stripe older version
     async function onToken(token) {
@@ -35,7 +38,8 @@ const Bookingscreen = () => {
             fromdate,
             todate,
             totalamount,
-            totaldays
+            totaldays,
+            token
         }
 
         try {
@@ -58,13 +62,17 @@ const Bookingscreen = () => {
 
 
     useEffect(() => {
+        if (!localStorage.getItem('currentuser')) {
+            window.location.href = '/login'
+        }
+
         async function fetch() {
             try {
                 setloading(true);
                 const data = (await axios.post("/api/rooms/getroombyid", { roomid: roomid })).data;
                 setroom(data);
                 settotalamount(data.rentperday * totaldays)
-                console.log(data);
+                // console.log(data);
                 setloading(false);
             } catch (error) {
                 setloading(false);
@@ -75,7 +83,7 @@ const Bookingscreen = () => {
         fetch();
     }, [])
 
-    /*
+    //without payment mode i have to write this below code
     async function bookroom() {
         const bookingDetails = {
             room,
@@ -87,13 +95,19 @@ const Bookingscreen = () => {
         }
 
         try {
+            setloading(true);
             const result = await axios.post('/api/bookings/bookroom', bookingDetails)
             console.log("success on bookroom in bookingscreen", result);
+            setloading(false);
+            Swal.fire('Congratulation', 'Your room booked Successfully', 'success').then(result => { window.location.href = '/profile' })
         } catch (error) {
             console.log("somethings error on bookroom in bookingscreen", error);
+            setloading(false);
+            Swal.fire('Oops', 'Something went wrong', 'error').then(result => { window.location.href = '/bookings' })
+
         }
     }
-    */
+
 
 
     return (
@@ -131,18 +145,21 @@ const Bookingscreen = () => {
                                 </div>
 
                                 <div style={{ float: "right" }}>
-                                    {/* <button className='btn btn-primary' onClick={bookroom}>pay now</button> */}
+
+                                    <button className='btn btn-primary' onClick={bookroom}>pay now</button>
                                     {/* if i do not integrate payment option then simply create a pay now button  */}
 
 
+                                    {/* for payment integration */}
                                     {/* stripe */}
-                                    <StripeCheckout token={onToken}
-                                        amount={totalamount * 100}
-                                        currency='INR'
-                                        stripeKey="pk_test_51MoVrqSJh1BoeGIOJgZS9AsoESkwk3joOgMQWMjhrg8qz2YiQ3zOAjEZ3qi7TSvNecIjsuQYKKFsHRZeo9MEUGe100A569VD7Q">
-                                        <button className='btn btn-primary'>pay now</button>
-                                        {/* agar button nahi daale to automatic ek button daal deta hai */}
-                                    </StripeCheckout>
+
+                                    {/* <StripeCheckout token={onToken} */}
+                                    {/* // amount={totalamount * 100} */}
+                                    {/* // currency='INR' */}
+                                    {/* // stripeKey="pk_test_51MoVrqSJh1BoeGIOJgZS9AsoESkwk3joOgMQWMjhrg8qz2YiQ3zOAjEZ3qi7TSvNecIjsuQYKKFsHRZeo9MEUGe100A569VD7Q"> */}
+                                    {/* <button className='btn btn-primary'>pay now</button> */}
+                                    {/* agar button nahi daale to automatic ek button daal deta hai */}
+                                    {/* </StripeCheckout> */}
                                     {/* this code is of older version of stripe */}
 
 
