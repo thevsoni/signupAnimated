@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro&display=swap');
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Source Serif Pro', serif;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #23242a;
+
+    /* background-image: url('./bg-2.jpg'); */
+    background-image: url('https://media.istockphoto.com/id/1193068843/photo/astronaut-exploring-mars.jpg?b=1&s=170667a&w=0&k=20&c=YIXUfS0g5U5Mj8sqFPk8w1lGc1zyFyCpcQeiqzzfPYo=');
+    background-size: cover;
+}
+
+.box{
+    /* display: none; */
+    position: relative;
+    width: 380px;
+    height: 420px;
+    background: transparent;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.box form{
+    position: absolute;
+    inset: 4px;
+    background: transparent;
+    padding: 50px 40px;
+    border-radius: 8px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+}
+
+.box form h2{
+    color: #fff;
+    font-weight:bolder;
+    text-align: center;
+    letter-spacing: 0.1em;
+}
+
+.box form .inputBox{
+    position: relative;
+    width: 300px;
+    margin-top: 35px;
+}
+
+.box form .inputBox input{
+    position: relative;
+    width: 100%;
+    padding: 20px 10px 10px;
+    background: transparent;
+    outline: none;
+    border: none;
+    box-shadow: none;
+    color: #23242a;
+    font-size: 1em;
+    letter-spacing: 0.05em;
+    transition: 0.5s;
+    z-index: 10;
+}
+
+.box form .inputBox span{
+    position: absolute;
+    left: 0;
+    padding: 20px 0px 10px;
+    pointer-events: none;
+    /* color: #8f8f8f; */
+    /* color: #aae61f; */
+    font-size: 1em;
+    font-weight: bolder;
+    letter-spacing: 0.05em;
+    transition: 0.5s;
+}
+
+.box form .inputBox input:valid ~ span,
+.box form .inputBox input:focus ~ span{
+    color: #fff;
+    font-size: 0.75em;
+    transform: translateY(-34px);
+}
+
+.box form .inputBox i{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    /* background: #fff; */
+    background: rgb(134, 106, 106);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: 0.5s;
+    pointer-events: none;
+}
+.box form .inputBox input:valid ~ i,
+.box form .inputBox input:focus ~ i{
+    height: 44px;
+}
+
+.box form .links{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.box form .links a{
+    margin: 10px 0;
+    font-size: 0.75em;
+    font-weight: bold;
+    /* color: #8f8f8f; */
+    color:black;
+    text-decoration: none;
+}
+
+.box form .links a:hover,
+.box form .links a:nth-child(2){
+    color: #fff;
+}
+
+.box form input[type="submit"]{
+    border: none;
+    outline: none;
+    padding: 9px 25px;
+    background: #fff;
+    cursor: pointer;
+    font-size: 0.9em;
+    border-radius: 4px;
+    font-weight: 600;
+    width: 100px;
+    margin-top: 10px;
+}
+
+.box form input[type="submit"]:active{
+    opacity: 0.8;
+}
+
+@media screen and (max-width:380px){
+    .box form{
+        padding: 50px 30px;
+    }   
+    
+}
+@media screen and (max-width:340px){
+    .box form{
+        padding: 50px 15px;
+    }   
+    
+}
+@media screen and (max-width:300px){
+    .box form{
+        padding: 50px 10px;
+    }   
+    
+}
+
+@media screen and (max-width:250px){
+    .box form{
+        padding: 50px 5px;
+    }   
+    
+}
