@@ -7,6 +7,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { setAvatarRoute } from "../utils/APIRoutes";
+
+
 export default function SetAvatar() {
     const api = `https://api.multiavatar.com/4645646`;
     const navigate = useNavigate();
@@ -20,42 +22,42 @@ export default function SetAvatar() {
         draggable: true,
         theme: "dark",
     };
-    /*
-        useEffect(() => {
-            async function func() {
-                if (!localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY))
-                    navigate("/login");
-            }
-            func();
-        }, []);
-    */
-    /*
-        const setProfilePicture = async () => {
-            if (selectedAvatar === undefined) {
-                toast.error("Please select an avatar", toastOptions);
-            } else {
-                const user = await JSON.parse(
-                    localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+
+    useEffect(() => {
+        async function func() {
+            if (!localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY))
+                navigate("/login");
+        }
+        func();
+    }, []);
+
+
+    const setProfilePicture = async () => {
+        if (selectedAvatar === undefined) {
+            toast.error("Please select an avatar", toastOptions);
+        } else {
+            const user = await JSON.parse(
+                localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+            );
+
+            const { data } = await axios.post(`${setAvatarRoute}/${user._id}`, {
+                image: avatars[selectedAvatar],
+            });
+
+            if (data.isSet) {
+                user.isAvatarImageSet = true;
+                user.avatarImage = data.image;
+                localStorage.setItem(
+                    process.env.REACT_APP_LOCALHOST_KEY,
+                    JSON.stringify(user)
                 );
-    
-                const { data } = await axios.post(`${setAvatarRoute}/${user._id}`, {
-                    image: avatars[selectedAvatar],
-                });
-    
-                if (data.isSet) {
-                    user.isAvatarImageSet = true;
-                    user.avatarImage = data.image;
-                    localStorage.setItem(
-                        process.env.REACT_APP_LOCALHOST_KEY,
-                        JSON.stringify(user)
-                    );
-                    navigate("/");
-                } else {
-                    toast.error("Error setting avatar. Please try again.", toastOptions);
-                }
+                navigate("/");
+            } else {
+                toast.error("Error setting avatar. Please try again.", toastOptions);
             }
-        };
-    */
+        }
+    };
+
     useEffect(() => {
         async function func() {
 

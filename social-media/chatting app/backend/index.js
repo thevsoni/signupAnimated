@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/userRoutes');
+const messageRoutes = require('./routes/messagesRoutes');
 
 const app = express();
 require("dotenv").config();
@@ -10,6 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/auth', userRoutes);
+app.use("/api/messages", messageRoutes);
 
 PORT = 5000
 MONGO_URL = "mongodb+srv://thevsoni:Vishal2828@cluster0.ijgzmnf.mongodb.net/chat"
