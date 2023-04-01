@@ -16,6 +16,7 @@ mongoose.connect(mongoURL,
         //agar isse kaam na chale then 2 aur options dene padte hain ,i 
         //useCreateIndex:true,
         //useFindAndModify:false
+        //but now these two things are not supported more
 
         //if only mongodb use kare to kuch options nahi denge tb bhi chalega
     });

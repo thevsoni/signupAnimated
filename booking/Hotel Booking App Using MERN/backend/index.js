@@ -5,7 +5,7 @@ const app = express();
 //connect to mongodb
 const dbconfig = require('./db');
 
-//to collect request and its body
+//to collect request and its body in json form
 app.use(express.json());
 
 //connect with routes
