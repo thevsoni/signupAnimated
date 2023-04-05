@@ -62,3 +62,9 @@ const typed = new Typed('.multiple-text', {
     backDelay: 1000,
     loop: true
 });
+
+// edge cases
+// const edge = document.querySelector('.multiple-text');
+// if (edge.innerHTML.length == 0) {
+//     edge.innerHTML = "Fullstack Developer"
+// }
