@@ -471,9 +471,15 @@ span{
         flex-direction: column-reverse;
     }
 
-    .about img{
+    /* .about img{
         width: 70vw;
         margin-top:4rem;
+    } */
+    .about img{
+        width: 0vw;
+    }
+    .about .about-content a{
+        /* text-align: center; */
     }
 
     .services h2{
@@ -510,8 +516,11 @@ span{
         width: 90vw;
     }
 
-    .about-img img{
+    /* .about-img img{
         width: 90vw;
+    } */
+    .about-img img{
+        width: 0vw;
     }
 
     .footer{
