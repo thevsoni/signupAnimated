@@ -26,7 +26,7 @@ const UserSchema = mongoose.Schema({
     likedMovies: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Movie'
+            ref: 'movies'
         }
     ]
 },
@@ -36,4 +36,4 @@ const UserSchema = mongoose.Schema({
 
 );
 
-export default mongoose.model("User", UserSchema);
+export default mongoose.model("users", UserSchema);
