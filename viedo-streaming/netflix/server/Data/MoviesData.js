@@ -1,6 +1,6 @@
 export const MoviesData = [
     {
-        name: 'Legend of the seeker',
+        name: 'Legend of the seekerr',
         desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, qui.',
         titleImage: '12.jpg',
         image: '2.jpg',
