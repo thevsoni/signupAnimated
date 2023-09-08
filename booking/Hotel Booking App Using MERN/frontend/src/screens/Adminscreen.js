@@ -2,21 +2,25 @@ import React, { useState, useEffect } from 'react'
 import { Tabs } from 'antd'; //for tabs
 
 import axios from 'axios';
+import Axios from '../ApiCall/Axios';
 
 import Loader from '../components/Loader';
 import Error from '../components/Error';
 
 import Swal from 'sweetalert2';//to show popup
 
+import { useNavigate } from 'react-router-dom';
 
 const Adminscreen = () => {
 
+    let navigate = useNavigate()
     useEffect(() => {
         // if (!(JSON.parse(localStorage.getItem('currentuser')))) {
         //     window.location.href = '/';
         // }
         if (!(JSON.parse(localStorage.getItem('currentuser')).isAdmin)) {
-            window.location.href = '/';
+            // window.location.href = '/';
+            navigate("/");
         }
     }, [])
 
@@ -66,7 +70,7 @@ export function Bookings() {
     useEffect(() => {
         async function func() {
             try {
-                const data = (await axios.get('/api/bookings/getallbookings')).data
+                const data = (await Axios.get('/api/bookings/getallbookings')).data
                 setbookings(data);
                 setloading(false);
             } catch (error) {
@@ -127,7 +131,7 @@ export function Rooms() {
     useEffect(() => {
         async function func() {
             try {
-                const data = (await axios.get('/api/rooms/getallrooms')).data
+                const data = (await Axios.get('/api/rooms/getallrooms')).data
                 setrooms(data);
                 console.log(data)
                 setloading(false);
@@ -193,7 +197,7 @@ export function Users() {
     useEffect(() => {
         async function func() {
             try {
-                const data = (await axios.get('/api/users/getallusers')).data
+                const data = (await Axios.get('/api/users/getallusers')).data
                 console.log(data)
                 setusers(data);
                 setloading(false);
@@ -278,7 +282,7 @@ export function Addroom() {
 
         try {
             setloading(true)
-            const result = (await axios.post('/api/rooms/addroom', newroom)).data
+            const result = (await Axios.post('/api/rooms/addroom', newroom)).data
             setloading(false)
             Swal.fire('Congratulation', 'Your room added Successfully', 'success')
 

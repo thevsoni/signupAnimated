@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import Axios from '../ApiCall/Axios';
 import { useParams } from 'react-router-dom';//to get params from url
 import Loader from '../components/Loader';
 import Error from '../components/Error';
 import moment from 'moment';
+
+import { useNavigate } from 'react-router-dom';
 
 import StripeCheckout from 'react-stripe-checkout'; //stripe for payment integration but this is older version
 import { Elements } from '@stripe/react-stripe-js';
@@ -14,6 +17,9 @@ import { PaymentElement } from '@stripe/react-stripe-js';
 import Swal from 'sweetalert2';//to show payment successfull or failed
 
 const Bookingscreen = () => {
+
+    let navigate = useNavigate();
+
     const [loading, setloading] = useState(true);
     const [error, seterror] = useState();
     const [room, setroom] = useState();
@@ -43,7 +49,7 @@ const Bookingscreen = () => {
         }
 
         try {
-            const result = await axios.post('/api/bookings/bookroom', bookingDetails)
+            const result = await Axios.post('/api/bookings/bookroom', bookingDetails)
             console.log("success on bookroom in bookingscreen", result);
         } catch (error) {
             console.log("somethings error on bookroom in bookingscreen", error);
@@ -63,13 +69,14 @@ const Bookingscreen = () => {
 
     useEffect(() => {
         if (!localStorage.getItem('currentuser')) {
-            window.location.href = '/login'
+            // window.location.href = '/login'
+            navigate("/login")
         }
 
         async function fetch() {
             try {
                 setloading(true);
-                const data = (await axios.post("/api/rooms/getroombyid", { roomid: roomid })).data;
+                const data = (await Axios.post("/api/rooms/getroombyid", { roomid: roomid })).data;
                 setroom(data);
                 settotalamount(data.rentperday * totaldays)
                 // console.log(data);
@@ -96,14 +103,16 @@ const Bookingscreen = () => {
 
         try {
             setloading(true);
-            const result = await axios.post('/api/bookings/bookroom', bookingDetails)
+            const result = await Axios.post('/api/bookings/bookroom', bookingDetails)
             console.log("success on bookroom in bookingscreen", result);
             setloading(false);
-            Swal.fire('Congratulation', 'Your room booked Successfully', 'success').then(result => { window.location.href = '/profile' })
+            // Swal.fire('Congratulation', 'Your room booked Successfully', 'success').then(result => { window.location.href = '/profile' })
+            Swal.fire('Congratulation', 'Your room booked Successfully', 'success').then(result => { navigate('/profile') })
         } catch (error) {
             console.log("somethings error on bookroom in bookingscreen", error);
             setloading(false);
-            Swal.fire('Oops', 'Something went wrong', 'error').then(result => { window.location.href = '/bookings' })
+            // Swal.fire('Oops', 'Something went wrong', 'error').then(result => { window.location.href = '/bookings' })
+            Swal.fire('Oops', 'Something went wrong', 'error').then(result => { navigate('/profile') })
 
         }
     }

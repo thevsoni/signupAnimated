@@ -14,10 +14,10 @@ app.use(express.json());
 app.use('/api/auth', userRoutes);
 app.use("/api/messages", messageRoutes);
 
-PORT = 5000
-MONGO_URL = "mongodb+srv://thevsoni:Vishal2828@cluster0.ijgzmnf.mongodb.net/chat"
+PORT = process.env.PORT || 5000
+MONGO_URL = process.env.MONGO_URL
 
-// process.env.PORT process.env.MONGO_URL is not working ,doubt ,i think with concurrently , we cant use this 
+// process.env.PORT process.env.MONGO_URL doesn't work when we run frontend and backend together using concurrently 
 
 mongoose.connect(MONGO_URL, {
     useNewUrlParser: true,

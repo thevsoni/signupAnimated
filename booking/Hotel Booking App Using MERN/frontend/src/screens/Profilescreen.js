@@ -4,10 +4,12 @@ import Loader from '../components/Loader';
 import Error from '../components/Error';
 
 import axios from 'axios';
+import Axios from '../ApiCall/Axios';
 
 import { Tabs } from 'antd'; //for tabs
 import Swal from 'sweetalert2';//to show popup
 
+import { useNavigate } from 'react-router-dom';
 
 import { Tag, Divider } from 'antd'; //antd chips
 
@@ -17,10 +19,13 @@ const { TabPane } = Tabs; //in older version ,we were using this
 
 const Profilescreen = () => {
 
+    let navigate = useNavigate();
+
     const user = JSON.parse(localStorage.getItem('currentuser'));
     useEffect(() => {
         if (!user) {
-            window.location.href = '/login';
+            // window.location.href = '/login';|
+            navigate("/login")
         }
     }, [])
 
@@ -85,7 +90,7 @@ export function MyBookings() {
         async function func() {
             try {
                 setloading(true);
-                const data = (await axios.post('/api/bookings/getbookingsbyuserid', { userid: user._id })).data;
+                const data = (await Axios.post('/api/bookings/getbookingsbyuserid', { userid: user._id })).data;
                 setloading(false);
                 console.log(data)
                 setbookings(data);
@@ -102,7 +107,7 @@ export function MyBookings() {
     async function cancelBooking(bookingid, roomid) {
         try {
             setloading(true)
-            const result = (await axios.post('/api/bookings/cancelbooking', { bookingid, roomid })).data
+            const result = (await Axios.post('/api/bookings/cancelbooking', { bookingid, roomid })).data
             setloading(false)
             console.log(result)
             Swal.fire('Congratulation', 'Your room cancelled Successfully', 'success').then(result => { window.location.reload() })

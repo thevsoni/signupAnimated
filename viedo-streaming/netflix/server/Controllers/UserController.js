@@ -167,11 +167,14 @@ const changePassword = asyncHandler(async (req, res) => {
             await user.save();
             res.json({ message: "Password changed successfully" })
         }
+        else {
+            // res.json({ message: "you previous pwd is not matching" })
+            throw new Error("old password is not matched")
+        }
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
 })
-
 
 //get all liked movies
 //route get /api/users/favorites

@@ -1,10 +1,13 @@
 const express = require('express');
+require("dotenv").config();
+const cors = require('cors');
 
 const app = express();
 
 //connect to mongodb
 const dbconfig = require('./db');
 
+app.use(cors());
 //to collect request and its body in json form
 app.use(express.json());
 
@@ -17,8 +20,8 @@ app.use('/api/bookings', require('./routes/bookingsRoute'));
 
 
 
-const port = 5000;
-// const port = process.env.PORT || 5000;   //doubt how it takes
+// const port = 5000;
+const port = process.env.PORT || 5000;
 
 
 app.listen(port, () => {

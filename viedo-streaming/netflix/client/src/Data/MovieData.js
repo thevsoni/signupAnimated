@@ -143,3 +143,83 @@ export const Movies = [
         reviews: 0,
     },
 ]
+
+export const UserData = [
+    {
+        name: 'sonu',
+        image: '1.jpg',
+        message: "good movie but could be better than this",
+        rate: 1,
+        email: 'vs332837@gmail.com',
+    },
+    {
+        name: 'monu',
+        image: '2.jpg',
+        message: "good movie but could be better than this",
+        rate: 2,
+        email: 'vs332837@gmail.com',
+    },
+    {
+        name: 'tonu',
+        image: '3.jpg',
+        message: "good movie but could be better than this",
+        rate: 3,
+        email: 'vs332837@gmail.com',
+    },
+    {
+        name: 'vonu',
+        image: '4.jpg',
+        message: "good movie but could be better than this",
+        rate: 4,
+        email: 'vs332837@gmail.com',
+    },
+    {
+        name: 'wonu',
+        image: '5.jpg',
+        message: "good movie but could be better than this",
+        rate: 5,
+        email: 'vs332837@gmail.com',
+    },
+    {
+        name: 'xonu',
+        image: '6.jpg',
+        message: "good movie but could be better than this",
+        rate: 4,
+        email: 'vs332837@gmail.com',
+    },
+    {
+        name: 'yonu',
+        image: '7.jpg',
+        message: "good movie but could be better than this",
+        rate: 5,
+        email: 'vs332837@gmail.com',
+    },
+    {
+        name: 'zonu',
+        image: '8.jpg',
+        message: "good movie but could be better than this",
+        rate: 1,
+        email: 'vs332837@gmail.com',
+    },
+    {
+        name: 'bonu',
+        image: '9.jpg',
+        message: "good movie but could be better than this",
+        rate: 3,
+        email: 'vs332837@gmail.com',
+    },
+    {
+        name: 'conu',
+        image: '10.jpg',
+        message: "good movie but could be better than this",
+        rate: 2,
+        email: 'vs332837@gmail.com',
+    },
+    {
+        name: 'donu',
+        image: '11.jpg',
+        message: "good movie but could be better than this",
+        rate: 4,
+        email: 'vs332837@gmail.com',
+    },
+]
